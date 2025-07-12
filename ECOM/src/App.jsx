@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import './App.css'
+import { useEffect, useState } from 'react';
+import './App.css';
 import ProductList from './ProductList';
 import CategoryFilter from './CategoryFilter';
 
@@ -10,20 +10,24 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOrder, setSortOrder] = useState('asc');
 
+  const BASE_URL = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
-    fetch('http://localhost:8080/api/categories')
+    fetch(`${BASE_URL}/api/categories`)
       .then(response => response.json())
-      .then(data => setCategories(data));
+      .then(data => setCategories(data))
+      .catch(error => console.error('Error fetching categories:', error));
   }, []);
 
   useEffect(() => {
     const url = selectedCategory
-      ? `http://localhost:8080/api/products/category/${selectedCategory}`
-      : `http://localhost:8080/api/products`;
+      ? `${BASE_URL}/api/products/category/${selectedCategory}`
+      : `${BASE_URL}/api/products`;
 
     fetch(url)
       .then(response => response.json())
-      .then(data => setProducts(data));
+      .then(data => setProducts(data))
+      .catch(error => console.error('Error fetching products:', error));
   }, [selectedCategory]);
 
   const handleSearchTerm = (event) => {
