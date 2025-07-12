@@ -10,7 +10,7 @@ function ProductList({ products }) {
               src={product?.imageUrl || 'http://placehold.co/600x400'}
               className="card-img-top"
               alt={product?.name}
-              style={{ height: '200px', width: '100%', objectFit: 'cover' }}
+              style={{ height: '200px', width: '100%', objectFit: 'contain' }}
             />
             <div className="card-body">
               <h5 className="card-title">{product.name}</h5>
